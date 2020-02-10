@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import { WbSunny, Brightness3 } from '@material-ui/icons'
+import { Button } from '@material-ui/core'
 
-function App() {
+import './App.scss'
+import buttonStyles from './mui/buttonStyles'
+
+const App = () => {
+
+  const classes = buttonStyles()
+  const [night, setNight] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="my-room">
+      <div className={`my-room__mode my-room__mode${night ? `--night` : `--day`}`}>
+        {night ? <Brightness3 fontSize="inherit" /> : <WbSunny fontSize="inherit" />}
+      </div>
+      <Button 
+        className={`my-room__submit ${classes.root}`}
+        onClick={() => setNight(prevState => !prevState)}
+      >
+        {`Set ${night ? `day` : `night`}`}
+      </Button>
     </div>
   );
 }
